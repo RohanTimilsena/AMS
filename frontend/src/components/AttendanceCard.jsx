@@ -10,7 +10,7 @@ export default function AttendanceCard() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:5000/create-attendance", {
+      const res = await axios.post("https://ams-xhal.onrender.com/create-attendance", {
         fullName: fullName,
         time: time,
       });
@@ -29,7 +29,7 @@ export default function AttendanceCard() {
   // featch all attendance
   const featchAllAttendance = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/get-all-attendance");
+      const res = await axios.get("https://ams-xhal.onrender.com/get-all-attendance");
       console.log(res.data.data);
       setAttendances(res.data.data);
       // toast.success("Attendance Created Successfully");
@@ -47,7 +47,7 @@ export default function AttendanceCard() {
   const deleteAttendance = async (_id) => {
     try {
       const res = await axios.delete(
-        `http://localhost:5000/delete-single-attendance/${_id}`
+        `https://ams-xhal.onrender.com/delete-single-attendance/${_id}`
       );
       toast.success("Delete Success");
       featchAllAttendance();
