@@ -91,40 +91,57 @@ export default function AttendanceCard() {
         <div className="flex justify-end">
           <button
             type="submit"
-            className="bg-violet-600 hover:bg-violet-700 text-white px-6 py-2 rounded-md transition-all duration-200 cursor-pointer"
+            className="bg-violet-600 hover:bg-violet-700 text-white px-6 py-2 rounded-md transition-all duration-200 "
           >
             Create Attendance
           </button>
         </div>
       </form>
 
-      {/* Attendance List */}
-      <div className="max-w-2xl mx-auto mt-10 bg-white border border-gray-200 rounded-lg shadow-md p-6">
-        <h2 className="text-lg font-semibold text-gray-700 mb-4">Attendance Records</h2>
-        {attendances?.length > 0 ? (
-          attendances.map((eachAttendance, index) => (
-            <div
-              key={eachAttendance._id}
-              className="flex items-center justify-between border-b border-gray-100 py-3"
-            >
-              <div className="flex items-center space-x-8 text-gray-700">
-                <span className="font-medium">{index + 1}.</span>
-                <span>{eachAttendance.fullName}</span>
-                <span className="text-sm text-gray-500">{eachAttendance.time}</span>
-              </div>
+     
 
-              <button
-                onClick={() => deleteAttendance(eachAttendance._id)}
-                className="bg-red-500 hover:bg-red-600 cursor-pointer text-white text-xs px-3 py-1 rounded-md transition-all duration-200"
-              >
-                Delete
-              </button>
-            </div>
-          ))
-        ) : (
-          <p className="text-gray-500 text-sm">No attendance records found.</p>
-        )}
-      </div>
+      {/* Attendance List */}
+<div className="max-w-3xl mx-auto mt-12 bg-white border border-gray-200 rounded-2xl shadow-lg p-8">
+  <h2 className="text-xl font-bold text-gray-800 mb-6">Attendance Records</h2>
+
+  {attendances?.length > 0 ? (
+    <div className="overflow-x-auto">
+      <table className="min-w-full table-auto border-collapse">
+        <thead>
+          <tr className="bg-gray-50 text-left text-gray-500 text-sm uppercase tracking-wider">
+            <th className="px-4  py-3">#</th>
+            <th className="px-4  py-3">Full Name</th>
+            <th className="px-4  py-3">Time</th>
+            <th className="px-4 py-3 text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody className="text-gray-700">
+          {attendances.map((eachAttendance, index) => (
+            <tr
+              key={eachAttendance._id}
+              className="border-b border-gray-100 hover:bg-gray-50 transition"
+            >
+              <td className="px-4 py-3 font-medium">{index + 1}</td>
+              <td className="px-4 py-3">{eachAttendance.fullName}</td>
+              <td className="px-4 py-3">{eachAttendance.time}</td>
+              <td className="px-4 py-3 text-center">
+                <button
+                  onClick={() => deleteAttendance(eachAttendance._id)}
+                  className="bg-red-500 hover:bg-red-600 text-white text-sm px-4 py-1.5 rounded-md transition"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  ) : (
+    <p className="text-gray-500 text-sm">No attendance records found.</p>
+  )}
+</div>
+
     </div>
   );
 }
